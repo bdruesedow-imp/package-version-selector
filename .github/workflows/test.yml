@@ -15,8 +15,10 @@ jobs:
       with:
         owner: ${{ github.actor }}
         repository: ${{ github.repository }}
-        package: "package-version-selector"
         github-token: ${{ secrets.github_token }}
+        package: "package-version-selector"
+        keep: 1
+        filter: "SNAPSHOT-"
 
     - run: echo ::set-env name=APPENDIX::${{ steps.version-selector.outputs.versionids }}
     - run: echo ${{ env.APPENDIX }}
