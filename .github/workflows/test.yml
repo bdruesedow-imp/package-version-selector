@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: bdruesedow-imp/package-version-selector@master
+      id: version-selector
+      with:
+        owner: ${{ github.actor }}
+        repository: ${{ github.repository }}
+        package: "package-version-selector"
+        github-token: ${{ secrets.github_token }}
+
+    - run: echo ::set-env name=APPENDIX::${{ steps.version-selector.outputs.versionids }}
+    - run: echo ${{ env.APPENDIX }}
