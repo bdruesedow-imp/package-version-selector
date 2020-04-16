@@ -5,7 +5,7 @@ require('isomorphic-fetch');
 try {
 
     const owner = core.getInput('owner');
-    const repositoryName =  core.getInput('repository');//"https://github.com/virtualidentityag/"+core.getInput('repository').split("/").slice(-1);
+    const repositoryName =  core.getInput('repository').split("/").slice(-1);
     const packageName = core.getInput('package');
     const filterString = core.getInput('filter');
     const keep = core.getInput('keep');
@@ -69,7 +69,7 @@ try {
             },
             body: JSON.stringify({
                 query: `{
-                  repository(owner: "${owner}", name: "${repositoryName}") {
+                  repository(name: "${repositoryName}") {
                     packages(first: 1, names: ["${packageName}"]) {
                       edges {
                         node {
