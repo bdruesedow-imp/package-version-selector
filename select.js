@@ -15,6 +15,7 @@ try {
 
         try {
             // filter for package in repository
+            console.log(json);
             let packages = json.data.repository.packages.edges.filter(element => {
                 return element.node.name === packageName;
             });
@@ -55,6 +56,9 @@ try {
             return process.exit(-1);
         }
     }
+
+    console.log("Packagename:"+packageName);
+    console.log("RepositoryName:"+repositoryName);
 
     fetch('https://api.github.com/graphql', {
             method: 'POST',

@@ -10,7 +10,7 @@ The action is implemented to provide a comma seperated string of version ids for
 Example: Select all package versions containing the string "SNAPSHOT", but keep the latest 5 versions. 
 ```
 - name: "Select versions to delete."
-  uses: bdruesedow-imp/package-version-selector@master
+  uses: virtualidentityag/package-version-selector@master
   id: version-selector
   with:
     owner: ${{ github.actor }}
