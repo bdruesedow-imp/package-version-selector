@@ -5,7 +5,7 @@ require('isomorphic-fetch');
 try {
 
     const owner = core.getInput('owner');
-    const repositoryName = "virtualidentityag/"+core.getInput('repository').split("/").slice(-1);
+    const repositoryName =  core.getInput('repository');//"https://github.com/virtualidentityag/"+core.getInput('repository').split("/").slice(-1);
     const packageName = core.getInput('package');
     const filterString = core.getInput('filter');
     const keep = core.getInput('keep');
