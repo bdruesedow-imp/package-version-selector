@@ -59,6 +59,7 @@ try {
 
     console.log("Packagename:"+packageName);
     console.log("RepositoryName:"+repositoryName);
+    console.log("Owner:"+owner);
 
     fetch('https://api.github.com/graphql', {
             method: 'POST',
@@ -69,7 +70,7 @@ try {
             },
             body: JSON.stringify({
                 query: `{
-                  repository(name: "${repositoryName}") {
+                  repository(owner: "${owner}", name: "${repositoryName}") {
                     packages(first: 1, names: ["${packageName}"]) {
                       edges {
                         node {
