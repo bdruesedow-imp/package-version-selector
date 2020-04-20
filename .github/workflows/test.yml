@@ -10,10 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: bdruesedow-imp/package-version-selector@master
+    - uses: virtualidentityag/package-version-selector@master
       id: version-selector
       with:
-        owner: ${{ github.actor }}
+        owner: virtualidentityag
         repository: ${{ github.repository }}
         github-token: ${{ secrets.github_token }}
         package: "package-version-selector"

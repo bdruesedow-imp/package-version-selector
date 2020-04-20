@@ -6,7 +6,7 @@ try {
 
     const owner = core.getInput('owner');
     const repositoryName =  core.getInput('repository').split("/").slice(-1);
-    const packageName = core.getInput('package');
+    const packageName = core.getInput('package').toLowerCase();
     const filterString = core.getInput('filter');
     const keep = core.getInput('keep');
     const token = core.getInput('github-token');
@@ -15,16 +15,26 @@ try {
 
         try {
             // filter for package in repository
-            console.log(json);
             let packages = json.data.repository.packages.edges.filter(element => {
                 return element.node.name === packageName;
             });
+
+            // exit if no matching packages found
+            if (packages.length == 0) {
+                console.log("No matching packages found in this repository.");
+                process.exit(0);
+            }
 
             // filter for specific version names containing in package versions
             let versions = packages[0].node.versions.edges.filter(element => {
                 return element.node.version.indexOf(filterString) > -1;
             });
 
+            // exit if no maching versions found
+            if (versions.length == 0) {
+                console.log("No matching versions for \"" + filterString + "\" found for this package.");
+                process.exit(0);
+            }
 
             console.log("\nMatching versions for \"" + filterString + "\":");
 
@@ -44,6 +54,7 @@ try {
             if ( sliceNumber > 0 ) {
                 // select the oldest versions
                 let selectedIds = versionIds.slice(0, sliceNumber);
+                console.log(selectedIds);
                 // return the selected versions as comma separated string
                 return selectedIds.join();
             }
@@ -56,10 +67,6 @@ try {
             return process.exit(-1);
         }
     }
-
-    console.log("Packagename:"+packageName);
-    console.log("RepositoryName:"+repositoryName);
-    console.log("Owner:"+owner);
 
     fetch('https://api.github.com/graphql', {
             method: 'POST',
