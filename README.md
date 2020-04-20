@@ -7,13 +7,13 @@ The action is implemented to provide a comma seperated string of version ids for
 ## Usage:
 
 
-Example: Select all package versions containing the string "SNAPSHOT", but keep the latest 5 versions. 
+Example: Select all package versions containing the string "SNAPSHOT", but keep the latest 5 versions.
 ```
 - name: "Select versions to delete."
-  uses: bdruesedow-imp/package-version-selector@master
+  uses: virtualidentityag/package-version-selector@master
   id: version-selector
   with:
-    owner: ${{ github.actor }}
+    owner: virtualidentityag
     repository: ${{ github.repository }}
     github-token: ${{ secrets.github_token }}
     package: "package-name"
@@ -26,3 +26,5 @@ Example: Select all package versions containing the string "SNAPSHOT", but keep 
     token: ${{ secrets.github_token }}
 
 ```
+
+Attention: 'owner' is the owner of the repository, not the actor! 
